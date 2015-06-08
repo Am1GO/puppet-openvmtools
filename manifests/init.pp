@@ -55,6 +55,12 @@
 #   doing.
 #   Default: vmtoolsd
 #
+# [*supported*]
+#   Override module internal OS detection logic.
+#   Only set this if your platform is not supported or you know what you are
+#   doing.
+#   Default: auto-set, platform specific
+#
 # === Sample Usage:
 #
 #   class { 'openvmtools': }
@@ -79,9 +85,8 @@ class openvmtools (
   $service_enable        = true,
   $service_hasstatus     = $openvmtools::params::service_hasstatus,
   $service_pattern       = 'vmtoolsd',
+  $supported             = $openvmtools::params::supported,
 ) inherits openvmtools::params {
-
-  $supported = $openvmtools::params::supported
 
   # Validate our booleans
   validate_bool($with_desktop)
